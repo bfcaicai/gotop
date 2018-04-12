@@ -186,37 +186,54 @@ func widgetColors() {
 }
 
 func main() {
+	fmt.Println("1")
 	cliArguments()
 
+	fmt.Println("2")
 	keyBinds()
 
+	fmt.Println("3")
 	// need to do this before initializing widgets so that they can inherit the colors
 	termuiColors()
 
+	fmt.Println("4")
 	cpu = w.NewCPU(interval, zoom)
+	fmt.Println("5")
 	mem = w.NewMem(interval, zoom)
+	fmt.Println("6")
 	proc = w.NewProc(procLoaded, keyPressed)
+	fmt.Println("7")
 	if !minimal {
+		fmt.Println("8")
 		net = w.NewNet()
+		fmt.Println("9")
 		disk = w.NewDisk()
+		fmt.Println("10")
 		temp = w.NewTemp()
 	}
 
+	fmt.Println("11")
 	widgetColors()
+	fmt.Println("12")
 
 	<-procLoaded
+	fmt.Println("13")
 
 	// inits termui
 	err := ui.Init()
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println("14")
 	defer ui.Close()
+	fmt.Println("15")
 
 	setupGrid()
+	fmt.Println("16")
 
 	// load help widget after init termui/termbox so that it has access to terminal size
 	help = w.NewHelpMenu()
+	fmt.Println("17")
 
 	ui.On("<resize>", func(e ui.Event) {
 		ui.Body.Width, ui.Body.Height = e.Width, e.Height
@@ -227,6 +244,7 @@ func main() {
 
 		termResized <- true
 	})
+	fmt.Println("18")
 
 	// all rendering done here
 	go func() {
